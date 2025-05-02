@@ -156,98 +156,81 @@
     * ------------------------------------------------------ */
 
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("volunteerForm");
-  
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      const data = {
-        name: form.cName.value.trim(),
-        email: form.cEmail.value.trim(),
-        phone: form.cPhone.value.trim(),
-        ministry: form.cMinistry.value,
-        firstTime: form.cFirstTime.value,
-        comments: form.cComments.value.trim()
-      };
-  
-      fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.json())
-      .then(response => {
-        if (response.result === "success") {
-          alert("Thank you! Your volunteer form was submitted successfully.");
-          form.reset();
-        } else {
-          alert("Error submitting form. Please try again later.");
-          console.error("Server error:", response.message);
-        }
-      })
-      .catch(error => {
-        alert("Network error. Please try again.");
-        console.error("Fetch error:", error);
-      });
+  const form = document.getElementById("volunteerForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const data = new URLSearchParams();
+    data.append("name", form.cName.value.trim());
+    data.append("email", form.cEmail.value.trim());
+    data.append("phone", form.cPhone.value.trim());
+    data.append("ministry", form.cMinistry.value);
+    data.append("firstTime", form.cFirstTime.value);
+    data.append("comments", form.cComments.value.trim());
+
+    fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: data.toString()
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        alert("Thank you! Your volunteer form was submitted successfully.");
+        form.reset();
+      } else {
+        alert("Error submitting form. Please try again later.");
+        console.error("Server error:", response.message);
+      }
+    })
+    .catch(error => {
+      alert("Network error. Please try again.");
+      console.error("Fetch error:", error);
     });
   });
-
-/* Contact Form
-    * ------------------------------------------------------ */
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("contactForm");
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const data = {
-            name: form.cName.value.trim(),
-            phone: form.cPhone.value.trim(),
-            email: form.cEmail.value.trim(),
-            message: form.cMessage.value.trim()
-        };
-
-        fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(response => {
-            if (response.result === "success") {
-                alert("Message sent successfully!");
-                form.reset();
-            } else {
-                alert("Error submitting form. Please try again.");
-                console.error(response);
-            }
-        })
-        .catch(error => {
-            alert("Network error. Please try again.");
-            console.error("Fetch error:", error);
-        });
-    });
 });
 
 
+/* Contact Form
+    * ------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactForm");
 
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-fetch('https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  body: new URLSearchParams({
-    name: 'John Doe',
-    email: 'john@example.com'
-  })
-})
-.then(response => response.json())
-.then(data => console.log('Success:', data))
-.catch(error => console.error('Error:', error));
+    const data = new URLSearchParams();
+    data.append("name", form.cName.value.trim());
+    data.append("phone", form.cPhone.value.trim());
+    data.append("email", form.cEmail.value.trim());
+    data.append("message", form.cMessage.value.trim());
+
+    fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: data.toString()
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        alert("Message sent successfully!");
+        form.reset();
+      } else {
+        alert("Error submitting form. Please try again.");
+        console.error(response);
+      }
+    })
+    .catch(error => {
+      alert("Network error. Please try again.");
+      console.error("Fetch error:", error);
+    });
+  });
+});
+
 
   
