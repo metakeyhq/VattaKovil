@@ -1,0 +1,23 @@
+// routes.json
+{
+  "routes": [
+    {
+      "route": "/",
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://vattakovil.in",
+      "statusCode": 301,
+      "preserve": true,
+      "condition": {
+        "hostname": "www.vattakovil.in"
+      }
+    }
+  ]
+}
