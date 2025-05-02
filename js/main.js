@@ -233,4 +233,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-  
+/* Video Playback
+    * ------------------------------------------------------ */  
+
+function showFallback() {
+    document.getElementById('youtubeVideo').style.display = 'none';
+    document.getElementById('fallback').style.display = 'block';
+  }
