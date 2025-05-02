@@ -152,85 +152,82 @@
 
 })(jQuery);
 
-/* Department Form
-    * ------------------------------------------------------ */
-
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("volunteerForm");
+  // Volunteer Form
+  const volunteerForm = document.getElementById("volunteerForm");
+  if (volunteerForm) {
+    volunteerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+      const data = new URLSearchParams();
+      data.append("name", volunteerForm.cName.value.trim());
+      data.append("email", volunteerForm.cEmail.value.trim());
+      data.append("phone", volunteerForm.cPhone.value.trim());
+      data.append("ministry", volunteerForm.cMinistry.value);
+      data.append("firstTime", volunteerForm.cFirstTime.value);
+      data.append("comments", volunteerForm.cComments.value.trim());
 
-    const data = new URLSearchParams();
-    data.append("name", form.cName.value.trim());
-    data.append("email", form.cEmail.value.trim());
-    data.append("phone", form.cPhone.value.trim());
-    data.append("ministry", form.cMinistry.value);
-    data.append("firstTime", form.cFirstTime.value);
-    data.append("comments", form.cComments.value.trim());
-
-    fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data.toString()
-    })
-    .then(res => res.json())
-    .then(response => {
-      if (response.result === "success") {
-        alert("Thank you! Your volunteer form was submitted successfully.");
-        form.reset();
-      } else {
-        alert("Error submitting form. Please try again later.");
-        console.error("Server error:", response.message);
-      }
-    })
-    .catch(error => {
-      alert("Network error. Please try again.");
-      console.error("Fetch error:", error);
+      fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data.toString()
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          alert("Thank you! Your volunteer form was submitted successfully.");
+          volunteerForm.reset();
+        } else {
+          alert("Error submitting form. Please try again later.");
+          console.error("Server error:", response.message);
+        }
+      })
+      .catch(error => {
+        alert("Network error. Please try again.");
+        console.error("Fetch error:", error);
+      });
     });
-  });
+  }
+
+  // Contact Form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = new URLSearchParams();
+      data.append("name", contactForm.cName.value.trim());
+      data.append("phone", contactForm.cPhone.value.trim());
+      data.append("email", contactForm.cEmail.value.trim());
+      data.append("message", contactForm.cMessage.value.trim());
+
+      fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: data.toString()
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          alert("Message sent successfully!");
+          contactForm.reset();
+        } else {
+          alert("Error submitting form. Please try again.");
+          console.error(response);
+        }
+      })
+      .catch(error => {
+        alert("Network error. Please try again.");
+        console.error("Fetch error:", error);
+      });
+    });
+  }
 });
 
-
-/* Contact Form
-    * ------------------------------------------------------ */
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("contactForm");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const data = new URLSearchParams();
-    data.append("name", form.cName.value.trim());
-    data.append("phone", form.cPhone.value.trim());
-    data.append("email", form.cEmail.value.trim());
-    data.append("message", form.cMessage.value.trim());
-
-    fetch("https://script.google.com/macros/s/AKfycbzvO8NMgkpwCyPv1YJxzDUGf5y5qLwoW45xlIZIFUXByDPIIJaV_SjXRktVZuVURupiMw/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data.toString()
-    })
-    .then(res => res.json())
-    .then(response => {
-      if (response.result === "success") {
-        alert("Message sent successfully!");
-        form.reset();
-      } else {
-        alert("Error submitting form. Please try again.");
-        console.error(response);
-      }
-    })
-    .catch(error => {
-      alert("Network error. Please try again.");
-      console.error("Fetch error:", error);
-    });
-  });
-});
 
 
 /* Video Playback
