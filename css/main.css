@@ -3499,10 +3499,20 @@ html.no-csstransitions .hero-content {
   flex: 0 0 8rem;
   max-width: 8rem;
   margin-right: 2rem;
-  background-color: black; /* Add this line */
-  border-radius: 50%;       /* Optional: to match the image shape */
-  overflow: hidden;         /* Optional: to crop image neatly in circle */
+  background-color: black;    /* Black background */
+  border-radius: 50%;         /* Make the container circular */
+  overflow: hidden;           /* Hide any image overflow */
+  display: flex;              /* Center the image */
+  align-items: center;
+  justify-content: center;
 }
+
+.church-staff__picture img {
+  width: 7rem;                 /* Slightly smaller than container */
+  height: 7rem;
+  border-radius: 50%;         /* Keep image circular */
+}
+
 
 
 /* ------------------------------------------------------------------- 
