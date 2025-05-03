@@ -3499,13 +3499,11 @@ html.no-csstransitions .hero-content {
   flex: 0 0 8rem;
   max-width: 8rem;
   margin-right: 2rem;
+  background-color: black; /* Add this line */
+  border-radius: 50%;       /* Optional: to match the image shape */
+  overflow: hidden;         /* Optional: to crop image neatly in circle */
 }
 
-.church-staff__picture img {
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-}
 
 /* ------------------------------------------------------------------- 
  * ## event page 
